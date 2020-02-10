@@ -1,0 +1,55 @@
+{% extends "Blog/base.html" %}
+{% block title%}index{%endblock%}
+
+{% block head_search%}
+	<div class='row justify-content-md-center'>
+		<div class='col-md-3 offset-md-1 '>
+			<form action="#" method="post">
+				{% csrf_token %}	
+					<input type="search" class="form-control form-control-lg" name="search" id="search" value="" />
+								
+						<input type='submit' class='btn' value=''/>
+										
+			</form>
+		</div>
+	</div>
+	
+{% endblock %}
+
+{% block content %}
+	<div class='row'>
+		<ul class="list-group">
+			<li class="list-group-item d-flex justify-content-between align-items-center">
+				<a href="#">文章类型</a>
+			</li>
+			<!--注意 应该可以用超链接实现-->
+			{% for var in tp_list%}
+				<li class="list-group-item d-flex justify-content-between align-items-center">
+					<form action="{%url 'type_search' type=var.type %}" method="get">
+						<!--btn-outline-primary  btn-link -->
+						<input type="submit" class="btn btn-link" value={{var.type}} />
+						<span class="badge badge-primary badge-pill">{{var.number}}</span>
+					</form>
+				</li>
+			{% endfor %}
+		</ul>
+	<div class='col-7 offset-md-2'>
+					
+		
+					  
+			
+				
+					<div class="d-flex w-100 justify-content-between">
+						<h5 class="mb-1 ">{{article.title}}</h5>
+						<small>{{article.date}}</small>
+					</div>
+					<p class="mb-1 ">{{article.content|safe}}</p>
+					
+					<small>{{article.author}}</small>
+				
+			
+					  
+			
+	</div>
+	</div>
+{% endblock%}
