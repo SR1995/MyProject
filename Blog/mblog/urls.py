@@ -16,10 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from . import views
+from django.views.generic import TemplateView
 
 urlpatterns = [
-	path('',views.index,name='index'),
-	path('type=<str:type>',views.type_search,name='type_search'),
-	path('type=<str:type>/Article=<str:ArticleName>',views.show_Article,name='show_Article')
+	path('',views.index.as_view(),name='index'),#views.index,name='index'  IndexView.as_view
+	path('type=<str:type>',views.Type_search.as_view(),name='type_search'),
+	path('type=<str:type>/Article=<str:ArticleName>',views.Show_Article.as_view(),name='show_Article')
 	#path('ckeditor/',include('ckeditor_uploader.urls')),
 ]
