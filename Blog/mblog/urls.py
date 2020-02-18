@@ -21,6 +21,7 @@ from django.views.generic import TemplateView
 urlpatterns = [
 	path('',views.index.as_view(),name='index'),#views.index,name='index'  IndexView.as_view
 	path('type=<str:type>',views.Type_search.as_view(),name='type_search'),
-	path('type=<str:type>/Article=<str:ArticleName>',views.Show_Article.as_view(),name='show_Article')
+	path('type=<str:type>/Article=<str:ArticleName>',views.Show_Article.as_view(),name='show_Article'),
+	path('search',views.serach.as_view(),name='search')
 	#path('ckeditor/',include('ckeditor_uploader.urls')),
 ]

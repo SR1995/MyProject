@@ -89,6 +89,7 @@ class MyBase(TemplateView):
 		
 		'''
 			获取分页数目
+			contains 模糊匹配  like %xxx%
 		'''
 		
 		
@@ -195,4 +196,18 @@ class Show_Article(MyBase):
 		get_typeANumber_Article_All()
 		print(article)
 		return render(request,'Blog/Article.html',{'article':article,'tp_list':tp_list})'''
+		
+class serach(MyBase):
+	'''
+		搜索文章
+		因为无法通过get_page_number方法获取分页  现在要么重写该方法 要么使该方法可以使用
+		疑问  get 方法 按理说是可以接受到前端的get请求的参数的  但这里没有收到  目前使用request.GET.get(option)
+		Show_Article类中get方法获取到了url上的参数   难道get请求的参数不是url上的参数 
+	'''
+	def get(self,request,*args,**kwargs):
+		get_typeANumber_Article_All()
+		print(request.GET.get('Article'))
+		ArticleList = Article.objects.filter(title__contains=request.GET.get('Article'))
+		
+		return render(request,'Blog/index.html',{'ArticleList':ArticleList,'tp_list':tp_list})
 		
